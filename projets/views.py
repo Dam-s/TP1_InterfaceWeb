@@ -4,8 +4,9 @@ from django.http import HttpResponse, JsonResponse
 from django.db.models import Sum
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
 
-from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
+from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, ConnexionEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
 from projets.models import Employe, Projet, SousProjet, WorkTime
 
 # Create your views here.
@@ -235,8 +236,12 @@ def Enregistrement(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Bonjour {username}, vous êtes enregistré !')
-            return redirect('login')
+            return redirect('employes')
     else:
-        form = EnregistrementForm()
-    print(EnregistrementForm())    
+        form = EnregistrementForm() 
     return render (request, 'usagers/enregistrement.html', {'form' : form})
+
+#View de connexion
+class ConnexionView(LoginView):
+    template_name = "usagers/login.html"
+    authentication_form = ConnexionEmployeForm

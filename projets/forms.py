@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from projets.models import Employe, Projet, SousProjet, WorkTime
 
@@ -93,3 +93,27 @@ class EnregistrementForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        widgets = {
+            'username': forms.TextInput(attrs={'class' : 'form-control', 'placeholder' : 'nom utilisateur'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'prenom@outlook.com'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'mot de passe'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Saisissez le même mot de passe que précédemment'}),
+        }
+
+#Formulaire de connexion 
+class ConnexionEmployeForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Nom d'utilisateur",
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Nom d’utilisateur',
+            'autofocus': True
+        })
+    )
+    password = forms.CharField(
+        label="Mot de passe",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Mot de passe'
+        })
+    )         

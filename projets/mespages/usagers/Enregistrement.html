@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card border-0">
         <div class="card-header bg-info text-white text-center">
-            <h2>Enregistrer un Employé</h2>
+            <h2>Enregistrer un utilisateur</h2>
         </div>
         <div class="card-body">
             <form method="post">
@@ -19,6 +19,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold">Mot de passe </label>
+                    <div class="helptext" id="id_password1_helptext"><ul><li>Votre mot de passe ne peut pas trop ressembler à vos autres informations personnelles.</li><li>Votre mot de passe doit contenir au minimum 8 caractères.</li><li>Votre mot de passe ne peut pas être un mot de passe couramment utilisé.</li><li>Votre mot de passe ne peut pas être entièrement numérique.</li></ul></div>   
                     {{ form.password1 }}
                 </div>
                 <div class="mb-3">

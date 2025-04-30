@@ -110,7 +110,13 @@
             {% block documentation %} {% endblock %}
             {% block projets %} {% endblock %}
             {% block employesPage %} {% endblock %}
-            {% block contentPage %} {% endblock %}
+            {% block contentPage %} 
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endblock %}
         </div>
     </div>
     

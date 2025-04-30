@@ -1,5 +1,5 @@
 from django.urls import path
-from projets.views import AjouterEmployes, Assigner, Enregistrement, LogTime, ajouterProjet, ajouterSousProjet, dashboard, detailEmploye, detailProjet, employes, get_projets_par_employe, modifierEmploye, modifierProjet, projets, supprimeSousproj, supprimerEmploye, supprimerProjet
+from projets.views import AjouterEmployes, Assigner, ConnexionView, Enregistrement, LogTime, ajouterProjet, ajouterSousProjet, dashboard, detailEmploye, detailProjet, employes, get_projets_par_employe, modifierEmploye, modifierProjet, projets, supprimeSousproj, supprimerEmploye, supprimerProjet
 
 urlpatterns = [
     path('', projets, name="projets"),
@@ -23,6 +23,7 @@ urlpatterns = [
     path('dashboard/', dashboard, name="dashboard"),
     
     path('enregistrement/', Enregistrement, name='enregistrement'),
+    path('login', ConnexionView.as_view(), name='login')
 ]
 
 
