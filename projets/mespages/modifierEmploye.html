@@ -1,0 +1,38 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5">
+    <div class="card border-0">
+        <div class="card-header bg-info text-white text-center">
+            <h2>Ajouter un Employé</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="fw-bold">Nom</label>
+                    {{ form.nom }}
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Prénom</label>
+                    {{ form.prenom }}
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Email</label>
+                    {{ form.courriel }}
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Statut</label>
+                    {{ form.statut }}
+                </div>
+                <button type="submit" class="btn btn-success mt-3">
+                    <i class="fas fa-save"></i> Ajouter
+                </button>
+                <a href="{% url 'employes' %}" class="btn btn-secondary mt-3">
+                    <i class="fas fa-arrow-left"></i> Annuler
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

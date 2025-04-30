@@ -1,0 +1,44 @@
+{% extends 'master.html' %}
+{% block titre %} PIW2025-A Propos {% endblock %}
+{% block titrepage %} A Propos {% endblock %}
+{% block apropos %} 
+<div class="container my-5">
+    <div class="row">
+        <!-- Environnement de Développement -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm border-0 rounded">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Environnement de Développement</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Python :</strong> {{ environnement.python }}</li>
+                        <li class="list-group-item"><strong>Django :</strong> {{ environnement.django }}</li>
+                        <li class="list-group-item"><strong>Visual Studio Code :</strong> {{ environnement.vs_code }}</li>
+                        <li class="list-group-item"><strong>Bootstrap :</strong> {{ environnement.bootstrap }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations du Concepteur -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-sm border-0 rounded">
+                <div class="card-header bg-info text-white">
+                    <h3 class="mb-0">Informations du Concepteur</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Nom :</strong> {{ concepteur.nom }}</li>
+                        <li class="list-group-item"><strong>Numéro d'étudiant :</strong> {{ concepteur.noEtudiant }}</li>
+                        <li class="list-group-item"><strong>Cours :</strong> {{ concepteur.cours }}</li>
+                        <li class="list-group-item"><strong>Travail :</strong> {{ concepteur.travail }}</li>
+                        <li class="list-group-item"><strong>Date de remise :</strong> {{ concepteur.dateRemise }}</li>
+                        <li class="list-group-item"><strong>Cégep :</strong> {{ concepteur.cegep }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

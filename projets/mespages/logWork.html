@@ -1,0 +1,70 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5 mb-5">
+  <div class="card border-0">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🕓 Saisie des heures de travail</h4>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="id_employe" class="form-label">👤 Employé</label>
+            {{ form.employe }}
+          </div>
+          <div class="col-md-6">
+            <label for="id_date_travail" class="form-label">📅 Date de travail</label>
+            {{ form.date_travail }}
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="id_heuresTravail" class="form-label">⏳ Heures travaillées</label>
+            {{ form.heuresTravail }}
+          </div>
+          <div class="col-md-6">
+            <label for="id_projet" class="form-label">📁 Projet</label>
+            {{ form.projet }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="id_commentaire" class="form-label">📝 Commentaire</label>
+          {{ form.commentaire }}
+        </div>
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-success px-4">💾 Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Charger dynamiquement les projets en fonction de l'employé choisi -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const employeSelect = document.getElementById('id_employe');
+    const projetSelect = document.getElementById('id_projet');
+
+    employeSelect.addEventListener('change', function () {
+      const employeId = this.value;
+
+      fetch(`get_projets/?employe_id=${employeId}`)
+        .then(response => response.json())
+        .then(data => {
+          projetSelect.innerHTML = '<option value="">---------</option>';
+          data.forEach(projet => {
+            const option = document.createElement('option');
+            option.value = projet.id;
+            option.textContent = projet.nom;
+            projetSelect.appendChild(option);
+          });
+        });
+    });
+  });
+</script>
+{% endblock %}

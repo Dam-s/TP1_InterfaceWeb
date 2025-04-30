@@ -1,0 +1,89 @@
+{% extends 'master.html' %}
+{% block titre %} PIW2025-A Documentation {% endblock %}
+{% block titrepage %} Documentation du Projet {% endblock %}
+
+{% block documentation %}
+<div class="container my-5">
+    <!-- Introduction -->
+    <section id="introduction" class="mb-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="fw-bold">Introduction au Projet</h2>
+                <p class="lead text-muted">Bienvenue dans la documentation de notre projet ! Cette application est un système de gestion de projets et de suivi des heures travaillées. Elle permet aux utilisateurs de gérer des projets, d'assigner des tâches, de suivre les heures travaillées par les employés, et d'avoir une vue d'ensemble sur la progression des projets.</p>
+                <p>Ce projet a été développé dans le cadre du cours PIW2025, avec pour objectif de créer une application web robuste et facile à utiliser, en utilisant Django et Bootstrap.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Utilisées -->
+    <section id="technologies" class="mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="fw-bold text-center">Technologies Utilisées</h3>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-file-earmark-code"></i> Django</h5>
+                        <p>Django est un framework web Python de haut niveau qui encourage le développement rapide et propre des applications web. Il est utilisé ici pour gérer la logique backend, les bases de données, les vues et la gestion des utilisateurs.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-bootstrap"></i> Bootstrap</h5>
+                        <p>Bootstrap est un framework CSS qui facilite la création d'interfaces web modernes et réactives. Dans ce projet, il est utilisé pour rendre l'application agréable à l'œil et entièrement responsive sur tous les types d'écrans.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fonctionnalités du Projet -->
+    <section id="fonctionnalites" class="mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="fw-bold text-center">Fonctionnalités</h3>
+                <p class="lead text-muted text-center">Le projet inclut plusieurs fonctionnalités pour assurer une gestion efficace des projets et des employés.</p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-person-fill"></i> Gestion des Employés</h5>
+                        <p>Les administrateurs peuvent ajouter, modifier ou supprimer des employés. Les employés peuvent être assignés à différents projets, et leurs heures de travail sont suivies.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-clipboard-check"></i> Suivi des Projets</h5>
+                        <p>Les projets sont créés avec une date de début et de fin, une description, et un budget estimé en heures. Un tableau de bord affiche les progrès des projets en temps réel, avec la possibilité de filtrer les projets par employé ou période.</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-bar-chart"></i> Tableaux de Bord</h5>
+                        <p>Le tableau de bord affiche les informations de suivi des heures et la progression des projets, avec des graphiques et des filtres pour comparer les heures estimées et réelles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processus de Développement -->
+    <section id="developpement" class="mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="fw-bold text-center">Processus de Développement</h3>
+                <p class="lead text-muted text-center">Le développement du projet s'est fait en plusieurs étapes :</p>
+                <ul>
+                    <li><strong>Planification :</strong> Définition des besoins fonctionnels, des technologies et des outils à utiliser.</li>
+                    <li><strong>Conception :</strong> Création de la base de données, des modèles et des vues pour l'application. Design des interfaces utilisateur avec Bootstrap.</li>
+                    <li><strong>Développement :</strong> Développement de la logique du backend en Django, mise en place des routes, des vues et des formulaires. Intégration des fonctionnalités frontend avec HTML, CSS, et JavaScript.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion" class="mb-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="fw-bold">Conclusion</h3>
+                <p class="lead text-muted">Ce projet a été un défi pour moi . J'ai beaucoup appris sur le developpement web que ce soit frontend ou backend. Le projet m'a aussi poussé a fait des recherches des notions comme les fonctions d'aggrégation, récuperation des données en JSON sur les forumes de developpeur comme stack overflow et d'autres. J'ai beaucoup aimé le faire et je souhaite l'améliorer au fur et à mesure des notions qui seront abordées en classe. </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

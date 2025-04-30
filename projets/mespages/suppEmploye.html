@@ -1,0 +1,23 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5">
+    <div class="card border-danger shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h4>Confirmer la suppression</h4>
+        </div>
+        <div class="card-body">
+            <p>Voulez-vous vraiment supprimer l’employé suivant ?</p>
+            <ul>
+                <li><strong>Nom :</strong> {{ lempSupp.nom }} {{ lempSupp.prenom }}</li>
+                <li><strong>Courriel :</strong> {{ lempSupp.courriel }}</li>
+            </ul>
+            <form method="POST">
+                {% csrf_token %}
+                <a href="{% url 'employes' %}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

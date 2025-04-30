@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+      <nav class="sidebar d-flex flex-column align-items-center">
+        <img src=" {% static 'mesImages/damas-high-resolution-logo-transparent.png' %}" alt="Logo du gestionnaire de projet" style="width: 100px; height: 100px;">
+        <a class="nav-link" href="/"><i class="bi bi-house-door-fill"></i> Accueil</a>
+        <a class="nav-link" href="{% url 'projets' %}"><i class="bi bi-folder-fill"></i> Projets</a>
+        <a class="nav-link" href="{% url 'employes' %}"><i class="bi bi-people-fill"></i> Employés</a>
+        <a class="nav-link" href="{% url 'LogTime' %}"><i class="bi bi-activity"></i>Log Work</a>
+        <a class="nav-link" href="{% url 'dashboard' %}"><i class="bi bi-speedometer"></i>Dashboard</a>
+        <a class="nav-link" href="/documentation/"><i class="bi bi-file-earmark-word-fill"></i></i>Documentation</a>
+        <a class="nav-link" href="/apropos/"><i class="bi bi-envelope-fill"></i>A propos</a>
+      </nav>
+</body>
+</html>

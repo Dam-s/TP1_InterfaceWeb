@@ -1,0 +1,114 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5">
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">📊 Tableau de bord - Suivi des heures</h5>
+    </div>
+    <div class="card-body">
+      <form method="get" class="row g-3">
+        <div class="col-md-4">
+          <label for="projet" class="form-label">Projet</label>
+          <select name="projet" class="form-select">
+            <option value="">-- Tous les projets --</option>
+            {% for p in projets %}
+              <option value="{{ p.pk }}" {% if request.GET.projet == p.pk|stringformat:"s" %}selected{% endif %}>{{ p.nomProjet }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="employe" class="form-label">Employé</label>
+          <select name="employe" class="form-select">
+            <option value="">-- Tous les employés --</option>
+            {% for e in employes %}
+              <option value="{{ e.pk }}" {% if request.GET.employe == e.pk %}selected{% endif %}>{{ e.nom }} {{ e.prenom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="date_debut" class="form-label">Début</label>
+          <input type="date" name="date_debut" class="form-control" value="{{ request.GET.date_debut }}">
+        </div>
+        <div class="col-md-2">
+          <label for="date_fin" class="form-label">Fin</label>
+          <input type="date" name="date_fin" class="form-control" value="{{ request.GET.date_fin }}">
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-success">🔍 Filtrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          <h6 class="mb-0">🧾 Résultat</h6>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Employé</th>
+                <th>Projet</th>
+                <th>Date</th>
+                <th>Heures</th>
+                <th>Commentaire</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in worktimes %}
+              <tr>
+                <td>{{ item.employe.nom }} {{ item.employe.prenom }}</td>
+                <td>{{ item.projet.nomProjet }}</td>
+                <td>{{ item.date_travail }}</td>
+                <td>{{ item.heuresTravail }}</td>
+                <td>{{ item.commentaire }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          <h6 class="mb-0">📈 Graphique</h6>
+        </div>
+        <div class="card-body">
+          <canvas id="workChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('workChart');
+  const workChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ labels|safe }},
+      datasets: [{
+        label: 'Heures travaillées',
+        data: {{ data|safe }},
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

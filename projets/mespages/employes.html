@@ -1,0 +1,46 @@
+{% extends 'master.html' %}
+{% block titre %} PIW2025-Employes {% endblock %}
+{% block titrepage %} Listes des Employés {% endblock %}
+
+{% block employesPage %} 
+<div class="container mt-5">
+    <a href="{% url 'ajouterEmployes' %}" class="btn btn-success mb-3">
+        <i class="fas fa-user-plus"></i> Ajouter un employé
+    </a>
+
+    <table class="table table-striped shadow-lg">
+        <thead class="table-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Courriel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employe in mesEmployes %}
+            <tr>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td>{{ employe.courriel }}</td>
+                <td>
+                    <a href="{% url 'detailEmploye' employe.codeEmploye %}" class="btn btn-info btn-sm">
+                        <i class="fas fa-eye"></i> Détails
+                    </a>
+                    <a href="{% url 'modifierEmploye' employe.codeEmploye %}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <a href="{% url 'supprimerEmploye' employe.codeEmploye %}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">Aucun employé trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}

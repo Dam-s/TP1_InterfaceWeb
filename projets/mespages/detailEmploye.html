@@ -1,0 +1,32 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-2">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Détails de l'Employé</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="mb-3">{{ monEmploye.prenom }} {{ monEmploye.nom }}</h4>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Courriel :</strong> {{ monEmploye.courriel }}</li>
+                <li class="list-group-item"><strong>Statut :</strong> {{ monEmploye.get_statut_display }}</li>
+            </ul>
+
+            <h5 class="mt-4">Projets de l'employé :</h5>
+            <ul class="list-group">
+                {% for proj in monEmploye.projets.all %}
+                    <li class="list-group-item">
+                        <strong>{{ proj.nomProjet }}</strong>
+                        <br><small>Du {{ proj.dateDebut }} au {{ proj.dateEcheanche }}</small>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">Aucun projet assigné.</li>
+                {% endfor %}
+            </ul>
+
+            <a href="{% url 'employes' %}" class="btn btn-secondary mt-3">Retour</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

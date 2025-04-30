@@ -1,0 +1,47 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card  border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Modifier ce Projet</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="fw-bold">Nom du projet</label>
+                            {{ form.nomProjet }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="fw-bold">Description</label>
+                            {{ form.description }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="fw-bold">Date de début</label>
+                                {{ form.dateDebut }}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="fw-bold">Date d’échéance</label>
+                                {{ form.dateEcheanche }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <a href="{% url 'projets' %}" class="btn btn-secondary mt-3">
+                            <i class="fas fa-arrow-left"></i> Annuler
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ajout des icônes FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}

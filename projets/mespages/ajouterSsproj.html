@@ -1,0 +1,50 @@
+{% extends 'master.html' %}
+
+{% block contentPage %}
+<div class="container mt-5">
+    <div class="card  border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0">Ajouter un sous-projet au projet à <strong>{{ projet}}</strong></h4>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" novalidate>
+                {% csrf_token %}
+
+                <div class="mb-2 d-flex">
+                    <label for="id_codeSousProjet" class="form-label">Code du sous-projet</label>
+                    {{ form.codeSousProjet}}
+                </div>
+
+                <div class="mb-2 d-flex">
+                    <label for="id_nomSp" class="form-label">Nom</label>
+                    {{ form.nomSp }}
+                </div>
+
+                <div class="mb-2 d-flex">
+                    <label for="id_descriptionSp" class="form-label">Description</label>
+                    {{ form.descriptionSp }}
+                </div>
+
+                <div class="mb-2 d-flex">
+                    <label for="id_dateDebutSp" class="form-label">Date de début</label>
+                    {{ form.dateDebutSp }}
+                </div>
+
+                <div class="mb-2 d-flex">
+                    <label for="id_dateEcheanceSp" class="form-label">Date d'échéance</label>
+                    {{ form.dateEcheanceSp }}
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle-fill"></i> Ajouter
+                    </button>
+                    <a href="{% url 'projets'%}" class="btn btn-outline-secondary">
+                        Annuler
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
