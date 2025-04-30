@@ -3,8 +3,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Sum
 from datetime import datetime
+from django.contrib import messages
 
-from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
+from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
 from projets.models import Employe, Projet, SousProjet, WorkTime
 
 # Create your views here.
@@ -225,3 +226,17 @@ def detailProjet(request, code):
         'pourcentage': pourcentage,
     })
 
+
+# View d'enregistrement
+def Enregistrement(request):
+    if request.method == "POST":
+        form = EnregistrementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Bonjour {username}, vous êtes enregistré !')
+            return redirect('login')
+    else:
+        form = EnregistrementForm()
+    print(EnregistrementForm())    
+    return render (request, 'usagers/enregistrement.html', {'form' : form})

@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 from projets.models import Employe, Projet, SousProjet, WorkTime
 
@@ -73,7 +75,7 @@ class SousProjetForm(forms.ModelForm):
         }
 
 
-#Formualair de log Work
+#Formualaire de log Work
 class WorkTimeForm(forms.ModelForm):
     class Meta:
         model = WorkTime
@@ -86,3 +88,8 @@ class WorkTimeForm(forms.ModelForm):
             'commentaire': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
 
+#Formulaire d'enregistrement
+class EnregistrementForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
