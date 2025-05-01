@@ -116,4 +116,31 @@ class ConnexionEmployeForm(AuthenticationForm):
             'class': 'form-control',
             'placeholder': 'Mot de passe'
         })
-    )         
+    ) 
+
+class WorkTimeFormEmploye(forms.ModelForm):
+    class Meta:
+        model = WorkTime
+        fields = ['date_travail', 'heuresTravail', 'commentaire', 'projet']
+        widgets = {
+            'date_travail': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'projet': forms.Select(attrs={'class': 'form-select'}),
+            'heuresTravail': forms.NumberInput(attrs={'class': 'form-control', 'step': 0.25, 'min': 0}),
+            'commentaire': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        employe = kwargs.pop('employe', None)
+        super().__init__(*args, **kwargs)
+
+        if employe:
+            # Affiche le champ employé (en lecture seule)
+            self.fields['employe'] = forms.ModelChoiceField(
+                queryset=Employe.objects.filter(pk=employe.pk),
+                initial=employe,
+                disabled=True,
+                label='👤 Employé'
+            )
+
+            # Filtrer les projets liés à cet employé
+            self.fields['projet'].queryset = employe.projets.all()

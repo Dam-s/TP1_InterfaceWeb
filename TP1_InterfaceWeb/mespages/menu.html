@@ -9,11 +9,12 @@
         {% if user.is_authenticated %}
           {% if user.username != 'gerantapplication' %}
              <a class="nav-link" href="{% url 'mesprojets' %}"><i class="bi bi-folder-fill"></i>Mes projets</a>
+             <a class="nav-link" href="{% url 'logworkemploye' %}"><i class="bi bi-activity"></i>Log Work</a>
           {% endif %}
-          <a class="nav-link" href="{% url 'LogTime' %}"><i class="bi bi-activity"></i>Log Work</a>
           {% if user.username == 'gerantapplication' %}
             <a class="nav-link" href="{% url 'projets' %}"><i class="bi bi-folder-fill"></i> Projets</a>
             <a class="nav-link" href="{% url 'employes' %}"><i class="bi bi-people-fill"></i> Employés</a>
+            <a class="nav-link" href="{% url 'LogTime' %}"><i class="bi bi-activity"></i>Log Work</a>
             <a class="nav-link" href="{% url 'dashboard' %}"><i class="bi bi-speedometer"></i>Dashboard</a>
             <a class="nav-link" href="{% url 'enregistrement' %}"><i class="bi bi-person-plus-fill"></i>Enregistrement</a>
           {% endif %}

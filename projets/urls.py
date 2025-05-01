@@ -1,5 +1,5 @@
 from django.urls import path
-from projets.views import AjouterEmployes, Assigner, ConnexionView, Enregistrement, LogTime, Mesprojets, ajouterProjet, ajouterSousProjet, dashboard, detailEmploye, detailProjet, employes, get_projets_par_employe, modifierEmploye, modifierProjet, projets, supprimeSousproj, supprimerEmploye, supprimerProjet
+from projets.views import AjouterEmployes, Assigner, ConnexionView, Enregistrement, LogTime, LogTimeEmploye, Mesprojets, ajouterProjet, ajouterSousProjet, dashboard, detailEmploye, detailProjet, employes, get_projets_par_employe, modifierEmploye, modifierProjet, projets, supprimeSousproj, supprimerEmploye, supprimerProjet
 
 from django.contrib.auth import views as authentification_views
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', authentification_views.LogoutView.as_view(template_name = 'usagers/logout.html'), name='logout'),
     
     path('mesprojets/', Mesprojets, name='mesprojets'),
+    path('logworkemploye/', LogTimeEmploye, name='logworkemploye'),
 ]
 
 

@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 
-from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, ConnexionEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
+from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, ConnexionEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm, WorkTimeFormEmploye
 from projets.models import Employe, Projet, SousProjet, WorkTime
 
 # Create your views here.
@@ -138,11 +138,12 @@ def LogTime(request):
         form = WorkTimeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/projets')  # ou autre vue de confirmation
+            return redirect('accueil')  # ou autre vue de confirmation
     else:
         form = WorkTimeForm()
 
     employes = Employe.objects.all()
+    print(form)
     return render(request, 'logWork.html', {'form': form, 'employes': employes})
 
 
@@ -260,4 +261,20 @@ def Mesprojets(request):
         est_gestionnaire = employe.statut == 'G'
         projets_info.append({'projet': projet, 'est_gestionnaire': est_gestionnaire})
 
-    return render(request, 'usagers/mesprojets.html', {'projets_info': projets_info})    
+    return render(request, 'usagers/mesprojets.html', {'projets_info': projets_info})
+
+@login_required
+def LogTimeEmploye(request):
+    employe = Employe.objects.get(courriel=request.user.email)
+
+    if request.method == 'POST':
+        form = WorkTimeFormEmploye(request.POST, employe=employe)
+        if form.is_valid():
+            work = form.save(commit=False)
+            work.employe = employe
+            work.save()
+            return redirect('mesprojets')
+    else:
+        form = WorkTimeFormEmploye(employe=employe)
+
+    return render(request, 'usagers/logworkEmploye.html', {'form': form})

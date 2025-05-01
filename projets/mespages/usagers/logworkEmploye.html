@@ -1,0 +1,52 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block contentPage %}
+<div class="container mt-5 mb-5">
+  <div class="card border-0 shadow">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">🕓 Saisie des heures de travail</h4>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Employé connecté affiché (lecture seule) -->
+        <div class="mb-3">
+          <label class="form-label">👤 Employé</label>
+          <input type="text" class="form-control" value="{{ form.employe.value|default:user.get_full_name }}" readonly>
+        </div>
+
+        <!-- Champ date -->
+        <div class="mb-3">
+          <label for="id_date_travail" class="form-label">📅 Date de travail</label>
+          {{ form.date_travail}}
+        </div>
+
+        <!-- Champ heures -->
+        <div class="mb-3">
+          <label for="id_heuresTravail" class="form-label">⏳ Heures travaillées</label>
+          {{ form.heuresTravail}}
+        </div>
+
+        <!-- Champ projet -->
+        <div class="mb-3">
+          <label for="id_projet" class="form-label">📁 Projet</label>
+          {{ form.projet}}
+        </div>
+
+        <!-- Champ commentaire -->
+        <div class="mb-3">
+          <label for="id_commentaire" class="form-label">📝 Commentaire</label>
+          {{ form.commentaire}}
+        </div>
+
+        <!-- Bouton submit -->
+        <div class="text-end">
+          <button type="submit" class="btn btn-success px-4">💾 Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
