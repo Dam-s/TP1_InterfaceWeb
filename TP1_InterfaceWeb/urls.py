@@ -20,7 +20,7 @@ from TP1_InterfaceWeb.views import accueil, apropos, documentation
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', accueil),
+    path('', accueil, name='accueil'),
     path('apropos/', apropos),
     path('documentation/', documentation),
     path('projets/', include('projets.urls'))

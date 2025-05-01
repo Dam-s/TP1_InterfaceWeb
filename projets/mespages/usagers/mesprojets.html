@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+{% block titrepage %}Mes Projets{% endblock %}
+
+{% block contentPage %}
+<div class="container mt-4">
+    <h2>Mes Projets Assignés</h2>
+    {% if projets_info %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom du Projet</th>
+                    <th>Description</th>
+                    <th>Dates</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in projets_info %}
+                <tr>
+                    <td>{{ item.projet.nomProjet }}</td>
+                    <td>{{ item.projet.description }}</td>
+                    <td>{{ item.projet.dateDebut }} - {{ item.projet.dateEcheanche }}</td>
+                    <td>
+                        {% if item.est_gestionnaire %}
+                        <a href="{% url 'detailProjet' item.projet.codeProjet %}" class="btn btn-info btn-sm">Détails</a>
+                        <a href="{% url 'modifierProjet' item.projet.codeProjet  %}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="{% url 'AssignerEmployes' item.projet.codeProjet  %}" class="btn btn-success btn-sm">Assigner employés</a>
+                        {% else %}
+                          <a href="{% url 'detailProjet' item.projet.codeProjet %}" class="btn btn-info btn-sm">Détails</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun projet assigné.</p>
+    {% endif %}
+</div>
+{% endblock %}

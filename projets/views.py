@@ -5,6 +5,7 @@ from django.db.models import Sum
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 
 from projets.forms import AjoutEmployeForm, AjoutProjetForm, AssignEmployeForm, ConnexionEmployeForm, EnregistrementForm, ModifierEmployeForm, ModifierProjetForm, SousProjetForm, WorkTimeForm
 from projets.models import Employe, Projet, SousProjet, WorkTime
@@ -31,7 +32,7 @@ def modifierProjet(request, code):
         form = ModifierProjetForm(request.POST, instance=ProjetAModifier)
         if form.is_valid():
             form.save() 
-        return redirect('/projets')
+        return redirect('accueil')
     else:
         form = ModifierProjetForm(instance=ProjetAModifier)
     return render(request, "modifierProjet.html", context={'form': form, 'leProjetMod' : ProjetAModifier})
@@ -128,7 +129,7 @@ def supprimeSousproj(request, code):
     sp = get_object_or_404(SousProjet, codeSousProjet=code)
     if request.method == 'POST':
        sp.delete()
-       return redirect('/projets')
+       return redirect('accueil')
 
 
 
@@ -236,7 +237,7 @@ def Enregistrement(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Bonjour {username}, vous êtes enregistré !')
-            return redirect('employes')
+            return redirect('accueil')
     else:
         form = EnregistrementForm() 
     return render (request, 'usagers/enregistrement.html', {'form' : form})
@@ -245,3 +246,18 @@ def Enregistrement(request):
 class ConnexionView(LoginView):
     template_name = "usagers/login.html"
     authentication_form = ConnexionEmployeForm
+
+
+@login_required
+def Mesprojets(request):
+    email_utilisateur = request.user.email
+    employe = get_object_or_404(Employe, courriel=email_utilisateur)
+
+    projets = Projet.objects.filter(employes=employe)
+
+    projets_info = []
+    for projet in projets:
+        est_gestionnaire = employe.statut == 'G'
+        projets_info.append({'projet': projet, 'est_gestionnaire': est_gestionnaire})
+
+    return render(request, 'usagers/mesprojets.html', {'projets_info': projets_info})    

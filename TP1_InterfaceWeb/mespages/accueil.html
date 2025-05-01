@@ -4,6 +4,11 @@
 {% block titrepage %} Accueil {% endblock %}
 
 {% block accueil %} 
+    {% if user.is_authenticated %}
+      <div class="alert alert-info text-center mt-3" style="font-weight: bold; font-size: 1.2rem;">
+          Bonjour, {{ user.email }} . Vous êtes connéctés!!!
+      </div>
+   {% endif %}
    <div class="container content">
       <div class="row">
           <div class="col-md-8">
@@ -20,4 +25,5 @@
           </div>
        </div>
     </div>
+    
 {% endblock %}
